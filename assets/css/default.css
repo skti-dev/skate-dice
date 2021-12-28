@@ -80,7 +80,7 @@ body {
 
 .dice {
   height: 50px;
-  width: 150px;
+  width: 175px;
   border: none;
   border-radius: 30px;
   background-color: var(--highlight-color);
