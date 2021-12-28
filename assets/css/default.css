@@ -1,0 +1,105 @@
+/* Default */
+:root {
+  --primary-color: #222;
+  --secondary-color: rgb(43, 43, 43);
+  --contrast-color: rgb(235, 235, 235);
+  --box-shadow-color: rgba(0,0,0,0.4);
+  --highlight-color: rgb(127, 0, 211);
+  --highlight-color-darken: rgb(107, 0, 179);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+html, body, #app, body > div {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+#app {
+  background-color: var(--primary-color);
+  color: var(--contrast-color);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Title */
+.title {
+  background-color: var(--secondary-color);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  -webkit-box-shadow: 0px 3px 7px 0px var(--box-shadow-color); 
+  box-shadow: 0px 3px 7px 0px var(--box-shadow-color);
+}
+
+.title svg {
+  margin-right: 10px;
+  transform: scale(1.5);
+}
+
+/* Content */
+.content {
+  flex: 1;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.content h2 {
+  font-size: 1.275rem;
+}
+
+.content ul {
+  border-radius: 10px;
+  background-color: var(--secondary-color);
+  padding: 15px;
+  font-size: .9rem;
+}
+
+.content ul li {
+  margin-bottom: 5px;
+}
+
+.content ul li span {
+  font-weight: bold;
+  font-size: 1.175em;
+}
+
+/* Dice */
+.dice-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.dice {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 30px;
+  background-color: var(--highlight-color);
+  color: var(--contrast-color);
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 150ms ease-in-out;
+}
+
+.dice:hover, .dice:active {
+  background-color: var(--highlight-color-darken);
+}
+
+/* Footer */
+.footer {
+  background-color: var(--secondary-color);
+  -webkit-box-shadow: 0px -3px 7px 0px rgba(0,0,0,0.4); 
+  box-shadow: 0px -3px 7px 0px rgba(0,0,0,0.4);
+  padding: 10px;
+  font-size: .9rem;
+  text-align: center;
+}

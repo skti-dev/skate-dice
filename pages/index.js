@@ -1,141 +1,33 @@
-import React, { useState } from "react"
-
-const Title = ({ children }) => {
-  return (
-    <h1>{children}</h1>
-  )
-}
-
-const Dice = () => {
-  const [stances] = useState(["Regular", "Switch", "Fakie", "Nollie", false])
-  const [directions] = useState(["Backside", "Frontside", false])
-  const [spins] = useState(["180", "360", false])
-  const [tricks] = useState(
-    [
-      // Ollie
-      {name: "Ollie", spinnable: true, hasDirections: true}, //  reverse: false, bodyVarial: true
-      // Shove it
-      {name: "BS Shove It", spinnable: true, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "FS Shove It", spinnable: true, hasDirections: false}, //  reverse: true, bodyVarial: true
-      // Flip
-      {name: "Flip", spinnable: true, hasDirections: true}, //  reverse: false, bodyVarial: true
-      {name: "Varial Flip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "360 Flip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "Hardflip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "360 Hardflip", spinnable: false, hasDirections: false}, //  reverse: false, bodyVarial: false
-      // Heelflip
-      {name: "Heelflip", spinnable: true, hasDirections: true}, //  reverse: false, bodyVarial: true
-      {name: "Varial Heelflip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "Laser Flip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "Inward Heelflip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "360 Inward Heelflip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      // Big Spin
-      {name: "Big Spin", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      {name: "Big Spin Flip", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      {name: "Big Spin Heelflip", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      // Bigger Spin
-      {name: "Bigger Spin", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      {name: "Bigger Spin Flip", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      {name: "Bigger Spin Heelflip", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      // Gazelle Spin
-      {name: "Gazelle Spin", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      {name: "Gazelle Spin Flip", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      {name: "Gazelle Spin Heelflip", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      // Pressure
-      {name: "Pressure Flip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "Pressure Hardflip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      // Impossible
-      {name: "Impossible", spinnable: false, hasDirections: false}, //  reverse: false, bodyVarial: false
-      // Casper
-      {name: "Casper Flip", spinnable: false, hasDirections: false}, //  reverse: false, bodyVarial: false
-      {name: "Alpha Flip", spinnable: false, hasDirections: false}, //  reverse: false, bodyVarial: false
-      // Dolphin
-      {name: "Dolphin Flip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: false
-      {name: "Dragon Flip", spinnable: false, hasDirections: false}, //  reverse: false, bodyVarial: false
-      // Old School
-      {name: "Old School Flip", spinnable: true, hasDirections: true}, //  reverse: false, bodyVarial: true
-      {name: false, spinnable: true, hasDirections: true}
-    ]
-  )
-
-  const [hasFinalTrick, setHasFinalTrick] = useState(false)
-  const [selectedStance, setSelectedStance] = useState("")
-  const [selectedDirection, setSelectedDirection] = useState("")
-  const [selectedSpin, setSelectedSpin] = useState("")
-  const [selectedTrick, setSelectedTrick] = useState("")
-
-  const [hasError, setHasError] = useState(false)
-
-  const selectRandomValueFromArr = arr => {
-    return arr[Math.floor(Math.random() * arr.length)]
-  } 
-
-  const sortTrick = () => {
-    try {
-      const yourChoiceText = "Você decide!"
-
-      const randomTrick = selectRandomValueFromArr(tricks)
-      const { hasDirections, spinnable, name } = randomTrick
-
-      const randomStance = selectRandomValueFromArr(stances)
-      const randomDirection = selectRandomValueFromArr(directions)
-      const randomSpin = selectRandomValueFromArr(spins)
-
-      setSelectedStance(randomStance ? randomStance : yourChoiceText)
-      setSelectedDirection(!hasDirections ? "---" : randomDirection ? randomDirection : yourChoiceText)
-      setSelectedSpin(!spinnable ? "---" : randomSpin ? randomSpin : yourChoiceText)
-      setSelectedTrick(name ? name : yourChoiceText)
-
-      if(hasError) setHasError(false)
-      if(!hasFinalTrick) setHasFinalTrick(true)
-    }catch(e) {
-      console.error("An error has occured while sorting a new trick")
-      console.error(e)
-      setHasFinalTrick(false)
-      setHasError(true)
-    }
-  }
-
-  return (
-    <>
-      <h2> Clique no dado para sortear uma manobra </h2>
-      <div onClick={sortTrick}>
-        DADO
-      </div>
-      {
-        hasFinalTrick && (
-          <ul>
-            <li>Base: {selectedStance}</li>
-            <li>Direção: {selectedDirection}</li>
-            <li>Giro: {selectedSpin}</li>
-            <li>Manobra: {selectedTrick}</li>
-          </ul>
-        )
-      }
-      {
-        hasError && (
-          <p> Ocorreu um erro ao tentar sortear uma manobra. Por favor tente novamente.</p>
-        )
-      }
-    </>
-  )
-}
-
-const Footer = () => {
-  return (
-    <footer>
-      <span> Desenvolvido por Augusto Seabra | 2021 </span>
-    </footer>
-  )
-}
+import Title from "../components/Title/Title"
+import Dice from "../components/Dice/Dice"
+import Footer from "../components/Footer/Footer"
 
 const Home = () => {
   return (
-    <main>
-      <Title> Skate Dice </Title>
-      <div>
-        <Dice />
-      </div>
+    <main id="app">
+      <Title> 
+        <svg width="12" height="37" viewBox="0 0 12 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="10.1" height="36" rx="5.05" stroke="white"/>
+          <circle cx="3.78044" cy="27.5891" r="0.5" stroke="white" stroke-width="0.126087"/>
+          <path d="M3.78043 27.3478L3.8346 27.5146H4.00992L3.86809 27.6176L3.92226 27.7843L3.78043 27.6813L3.63859 27.7843L3.69277 27.6176L3.55093 27.5146H3.72625L3.78043 27.3478Z" fill="white"/>
+          <circle cx="7.31956" cy="27.5891" r="0.5" stroke="white" stroke-width="0.126087"/>
+          <path d="M7.31957 27.3478L7.37374 27.5146H7.54906L7.40723 27.6176L7.4614 27.7843L7.31957 27.6813L7.17773 27.7843L7.23191 27.6176L7.09007 27.5146H7.26539L7.31957 27.3478Z" fill="white"/>
+          <circle cx="7.31956" cy="30.9674" r="0.5" stroke="white" stroke-width="0.126087"/>
+          <path d="M7.31957 30.7261L7.37374 30.8928H7.54906L7.40723 30.9959L7.4614 31.1626L7.31957 31.0596L7.17773 31.1626L7.23191 30.9959L7.09007 30.8928H7.26539L7.31957 30.7261Z" fill="white"/>
+          <circle cx="3.78044" cy="30.9674" r="0.5" stroke="white" stroke-width="0.126087"/>
+          <path d="M3.78043 30.7261L3.8346 30.8928H4.00992L3.86809 30.9959L3.92226 31.1626L3.78043 31.0596L3.63859 31.1626L3.69277 30.9959L3.55093 30.8928H3.72625L3.78043 30.7261Z" fill="white"/>
+          <circle cx="3.78044" cy="8.12391" r="0.5" stroke="white" stroke-width="0.126087"/>
+          <path d="M3.78043 7.88261L3.8346 8.04935H4.00992L3.86809 8.1524L3.92226 8.31914L3.78043 8.21609L3.63859 8.31914L3.69277 8.1524L3.55093 8.04935H3.72625L3.78043 7.88261Z" fill="white"/>
+          <circle cx="7.31956" cy="8.12391" r="0.5" stroke="white" stroke-width="0.126087"/>
+          <path d="M7.31957 7.88261L7.37374 8.04935H7.54906L7.40723 8.1524L7.4614 8.31914L7.31957 8.21609L7.17773 8.31914L7.23191 8.1524L7.09007 8.04935H7.26539L7.31957 7.88261Z" fill="white"/>
+          <circle cx="7.31956" cy="11.5022" r="0.5" stroke="white" stroke-width="0.126087"/>
+          <path d="M7.31957 11.2609L7.37374 11.4276H7.54906L7.40723 11.5307L7.4614 11.6974L7.31957 11.5943L7.17773 11.6974L7.23191 11.5307L7.09007 11.4276H7.26539L7.31957 11.2609Z" fill="white"/>
+          <circle cx="3.78044" cy="11.5022" r="0.5" stroke="white" stroke-width="0.126087"/>
+          <path d="M3.78043 11.2609L3.8346 11.4276H4.00992L3.86809 11.5307L3.92226 11.6974L3.78043 11.5943L3.63859 11.6974L3.69277 11.5307L3.55093 11.4276H3.72625L3.78043 11.2609Z" fill="white"/>
+        </svg>
+        Skate Dice 
+      </Title>
+      <Dice />
       <Footer />
     </main>
   )
