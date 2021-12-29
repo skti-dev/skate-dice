@@ -64,6 +64,14 @@ const Dice = () => {
     return arr[Math.floor(Math.random() * arr.length)]
   } 
 
+  const [hasHistory, setHasHistory] = useState(false)
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false)
+  const [history] = useState([])
+
+  const handleClick = () => {
+    setIsHistoryOpen(!isHistoryOpen)
+  }
+
   const sortTrick = () => {
     try {
       const yourChoiceText = "Você decide!"
@@ -79,6 +87,9 @@ const Dice = () => {
       setSelectedDirection(!hasDirections ? "---" : randomDirection ? randomDirection : yourChoiceText)
       setSelectedSpin(!spinnable ? "---" : randomSpin ? randomSpin : yourChoiceText)
       setSelectedTrick(name ? name : yourChoiceText)
+      
+      if(hasHistory) history.push({ selectedStance, selectedDirection, selectedSpin, selectedTrick })
+      if(!hasHistory) setHasHistory(true)
 
       if(hasError) setHasError(false)
       if(!hasFinalTrick) setHasFinalTrick(true)
@@ -99,12 +110,62 @@ const Dice = () => {
       </div>
       {
         hasFinalTrick && (
-          <ul>
-            <li>Base: <span>{selectedStance}</span> </li>
-            <li>Direção: <span>{selectedDirection}</span> </li>
-            <li>Giro: <span>{selectedSpin}</span> </li>
-            <li>Manobra: <span>{selectedTrick}</span> </li>
-          </ul>
+          <>
+            <ul className="trick-list">
+              <li>Base: <span>{selectedStance}</span> </li>
+              <li>Direção: <span>{selectedDirection}</span> </li>
+              <li>Giro: <span>{selectedSpin}</span> </li>
+              <li>Manobra: <span>{selectedTrick}</span> </li>
+            </ul>
+            {
+              history.length > 0 && (
+                <>
+                  <span className="open-history" onClick={() => { handleClick() }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path fill="none" d="M0 0H24V24H0z"/><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12h2c0 4.418 3.582 8 8 8s8-3.582 8-8-3.582-8-8-8C9.25 4 6.824 5.387 5.385 7.5H8v2H2v-6h2V6c1.824-2.43 4.729-4 8-4zm1 5v4.585l3.243 3.243-1.415 1.415L11 12.413V7h2z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    {
+                      !isHistoryOpen && (<span class="tooltip"> Clique para visualizar o histórico </span>)
+                    }
+                  </span>
+                  {
+                    isHistoryOpen ? (
+                      <div className="history-container">
+                        <div className="history-title">
+                          <span className="history-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0H24V24H0z"/><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12h2c0 4.418 3.582 8 8 8s8-3.582 8-8-3.582-8-8-8C9.25 4 6.824 5.387 5.385 7.5H8v2H2v-6h2V6c1.824-2.43 4.729-4 8-4zm1 5v4.585l3.243 3.243-1.415 1.415L11 12.413V7h2z"/></svg>
+                          </span>
+                          <h3>Histórico</h3>
+                        </div>
+                        <div className="history-content">
+                          <ul>
+                            {
+                              history.map(({ selectedStance, selectedDirection, selectedSpin, selectedTrick }, index) => {
+                                return (
+                                  <li key={index}>
+                                    {index + 1} -
+                                    Base:
+                                    <span>{selectedStance}</span>
+                                    Direção:
+                                    <span>{selectedDirection}</span>
+                                    Giro:
+                                    <span>{selectedSpin}</span>
+                                    Manobra:
+                                    <span>{selectedTrick}</span>
+                                  </li>
+                                )
+                              })
+                            }
+                          </ul>
+                        </div>
+                      </div>
+                    ) : null
+                  }
+                </>
+              )
+            }
+          </>
         )
       }
       {
