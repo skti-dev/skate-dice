@@ -141,7 +141,7 @@ body > div {
 .history-container {
   margin-bottom: 15px;
   flex: 1;
-  max-height: 55%;
+  max-height: 50%;
 }
 
 .history-title {

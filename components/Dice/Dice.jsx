@@ -57,6 +57,7 @@ const Dice = () => {
   const [selectedDirection, setSelectedDirection] = useState("")
   const [selectedSpin, setSelectedSpin] = useState("")
   const [selectedTrick, setSelectedTrick] = useState("")
+  const [tries, setTries] = useState(0)
 
   const [hasError, setHasError] = useState(false)
 
@@ -87,8 +88,9 @@ const Dice = () => {
       setSelectedDirection(!hasDirections ? "---" : randomDirection ? randomDirection : yourChoiceText)
       setSelectedSpin(!spinnable ? "---" : randomSpin ? randomSpin : yourChoiceText)
       setSelectedTrick(name ? name : yourChoiceText)
+      setTries(Math.floor(Math.random() * 5) + 1)
       
-      if(hasHistory) history.push({ selectedStance, selectedDirection, selectedSpin, selectedTrick })
+      if(hasHistory) history.push({ selectedStance, selectedDirection, selectedSpin, selectedTrick, tries })
       if(!hasHistory) setHasHistory(true)
 
       if(hasError) setHasError(false)
@@ -116,6 +118,7 @@ const Dice = () => {
               <li>Direção: <span>{selectedDirection}</span> </li>
               <li>Giro: <span>{selectedSpin}</span> </li>
               <li>Manobra: <span>{selectedTrick}</span> </li>
+              <li>Tentativas: <span>{tries}</span> </li>
             </ul>
             {
               history.length > 0 && (
@@ -141,7 +144,7 @@ const Dice = () => {
                         <div className="history-content">
                           <ul>
                             {
-                              history.map(({ selectedStance, selectedDirection, selectedSpin, selectedTrick }, index) => {
+                              history.map(({ selectedStance, selectedDirection, selectedSpin, selectedTrick, tries }, index) => {
                                 return (
                                   <li key={index}>
                                     {index + 1} -
@@ -153,6 +156,8 @@ const Dice = () => {
                                     <span>{selectedSpin}</span>
                                     Manobra:
                                     <span>{selectedTrick}</span>
+                                    Tentativas:
+                                    <span>{tries}</span>
                                   </li>
                                 )
                               })
