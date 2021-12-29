@@ -126,7 +126,7 @@ const Dice = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
                     {
-                      !isHistoryOpen && (<span class="tooltip"> Clique para visualizar o histórico </span>)
+                      !isHistoryOpen && (<span className="tooltip"> Clique para visualizar o histórico </span>)
                     }
                   </span>
                   {

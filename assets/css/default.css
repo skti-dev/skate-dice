@@ -56,6 +56,7 @@ body > div {
 /* Content */
 .content {
   flex: 1;
+  height: calc(100% - 150px);
   margin: 20px;
   display: flex;
   flex-direction: column;
@@ -137,6 +138,12 @@ body > div {
   box-shadow: 0 0 10px 0px var(--box-shadow-color);
 }
 
+.history-container {
+  margin-bottom: 15px;
+  flex: 1;
+  max-height: 55%;
+}
+
 .history-title {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
@@ -161,9 +168,9 @@ body > div {
   border-bottom-right-radius: 10px;
   display: flex;
   flex-direction: column;
-  max-height: 250px;
   overflow-y: auto;
   overflow-x: hidden;
+  max-height: calc(100% - 48px);
   background-color: var(--primary-color)
 }
 
