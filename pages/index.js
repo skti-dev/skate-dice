@@ -1,5 +1,5 @@
 import Title from "../components/Title/Title"
-import Dice from "../components/Dice/Dice"
+import Content from "../components/Content/Content"
 import Footer from "../components/Footer/Footer"
 
 const Home = () => {
@@ -27,7 +27,7 @@ const Home = () => {
         </svg>
         Skate Dice 
       </Title>
-      <Dice />
+      <Content />
       <Footer />
     </main>
   )

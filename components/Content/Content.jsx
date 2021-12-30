@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react"
 
 import History from "../History/History"
 import Button from "../Button/Button"
+import TrickList from "../TrickList/TrickList"
 
 import allData from "../../data/dummyData"
 
-const Dice = () => {
+const Content = () => {
   const [stances, setStances] = useState([])
   const [directions, setDirections] = useState([])
   const [spins, setSpins] = useState([])
@@ -75,35 +76,21 @@ const Dice = () => {
   return (
     <div className="content">
       <Button handleClick={sortTrick}>Sortear Manobra!</Button>
-      {
-        hasFinalTrick && (
-          <>
-            <ul className="trick-list">
-              <li>Base: <span>{selectedStance}</span> </li>
-              <li>Direção: <span>{selectedDirection}</span> </li>
-              <li>Giro: <span>{selectedSpin}</span> </li>
-              <li>Manobra: <span>{selectedTrick}</span> </li>
-              <li>Tentativas: <span>{tries}</span> </li>
-              <hr />
-              <li>Acertou? 
-                <span onClick={() => { setCurrentStatus('y') }} className={`status-icon ${currentStatus == 'y' ? 'green' : ''}`}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </span>
-                <span onClick={() => { setCurrentStatus('n') }} className={`status-icon ${currentStatus == 'n' ? 'red' : ''}`}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </span> 
-              </li>
-            </ul>
-          </>
-        )
+      { hasFinalTrick && 
+        <TrickList 
+          selectedStance={selectedStance} 
+          selectedDirection={selectedDirection} 
+          selectedSpin={selectedSpin} 
+          selectedTrick={selectedTrick}
+          tries={tries}
+          currentStatus={currentStatus}
+          handleYesClick={() => { setCurrentStatus('y') }}
+          handleNoClick={() => { setCurrentStatus('n') }}
+        /> 
       }
       <History history={history}  />
     </div>
   )
 }
 
-export default Dice
+export default Content
