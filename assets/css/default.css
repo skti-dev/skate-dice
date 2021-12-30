@@ -35,7 +35,6 @@ body > div {
   color: var(--contrast-color);
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 /* Tooltip */
