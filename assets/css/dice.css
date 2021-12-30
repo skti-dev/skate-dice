@@ -1,0 +1,74 @@
+/* Dice */
+.dice-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.dice {
+  cursor: pointer;
+  height: 50px;
+  width: 175px;
+  border: none;
+  border-radius: 30px;
+  background-color: var(--highlight-color);
+  color: var(--contrast-color);
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 150ms ease-in-out;
+}
+
+.dice:hover, .dice:active {
+  background-color: var(--highlight-color-darken);
+}
+
+/* Trick List */
+.trick-list {
+  border-radius: 10px;
+  background-color: var(--secondary-color);
+  padding: 15px;
+  font-size: .9rem;
+}
+
+.trick-list li {
+  margin-bottom: 5px;
+}
+
+.trick-list li span {
+  font-weight: bold;
+  font-size: 1.175em;
+}
+
+.trick-list hr {
+  height: 1px;
+  border: unset;
+  background-color: var(--primary-color);
+  margin: 2px 0 5px 0;
+}
+
+.status-icon svg {
+  margin-bottom: -7px;
+  cursor: pointer;
+  transition: all 150ms;
+  opacity: .8;
+}
+
+.status-icon.red svg {
+  fill: #f18084;
+  stroke: #c40007;
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.status-icon.green svg {
+  fill: #a4fda4;
+  stroke: #047500;
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.status-icon:nth-child(1) {
+  margin: 0 10px;
+}

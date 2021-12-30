@@ -1,0 +1,16 @@
+/* Title */
+
+.title {
+  background-color: var(--secondary-color);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  -webkit-box-shadow: 0px 3px 7px 0px var(--box-shadow-color); 
+  box-shadow: 0px 3px 7px 0px var(--box-shadow-color);
+  font-weight: normal;
+}
+
+.title svg {
+  margin-right: 10px;
+  transform: scale(1.5);
+}

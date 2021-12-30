@@ -1,0 +1,78 @@
+/* History */
+.open-history {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  transform: translateX(-20px);
+  padding: 5px;
+  background-color: var(--dark-color);
+  width: 55px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.tooltip-history {
+  width: 230px;
+  max-width: 230px;
+  left: 63px;
+}
+
+.history-container {
+  margin-bottom: 15px;
+  flex: 1;
+  max-height: 200px;
+}
+
+.history-title {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background-color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.history-icon {
+  margin-right: 5px; 
+}
+
+.history-icon svg {
+  fill: var(--contrast-color);
+  transform: translateY(2px)
+}
+
+.history-content {
+  border: 1px solid var(--secondary-color);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100% - 48px);
+  background-color: var(--primary-color)
+}
+
+.history-content ul {
+  font-size: .8rem;
+}
+
+.history-content li {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--secondary-color)
+}
+
+.history-content li:last-child {
+  border-bottom: unset;
+}
+
+.history-content ul li > span {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0 10px 0 5px;
+}
+
+.history-content svg {
+  transform: translateY(3px)
+}
