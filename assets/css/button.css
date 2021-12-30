@@ -1,0 +1,24 @@
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.button {
+  cursor: pointer;
+  height: 50px;
+  width: 175px;
+  border: none;
+  border-radius: 30px;
+  background-color: var(--highlight-color);
+  color: var(--contrast-color);
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 150ms ease-in-out;
+}
+
+.button:hover, .button:active {
+  background-color: var(--highlight-color-darken);
+}

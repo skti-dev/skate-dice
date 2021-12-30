@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"
 
 import History from "../History/History"
-import allData from "../../assets/data/dummyData"
+import Button from "../Button/Button"
+
+import allData from "../../data/dummyData"
 
 const Dice = () => {
   const [stances, setStances] = useState([])
@@ -72,11 +74,7 @@ const Dice = () => {
 
   return (
     <div className="content">
-      <div className="dice-container">
-        <button onClick={sortTrick} className="dice">
-          Sortear Manobra!
-        </button>
-      </div>
+      <Button handleClick={sortTrick}>Sortear Manobra!</Button>
       {
         hasFinalTrick && (
           <>

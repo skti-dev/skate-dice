@@ -1,29 +1,3 @@
-/* Dice */
-.dice-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 15px;
-  position: relative;
-}
-
-.dice {
-  cursor: pointer;
-  height: 50px;
-  width: 175px;
-  border: none;
-  border-radius: 30px;
-  background-color: var(--highlight-color);
-  color: var(--contrast-color);
-  font-weight: bold;
-  font-size: 1rem;
-  transition: background-color 150ms ease-in-out;
-}
-
-.dice:hover, .dice:active {
-  background-color: var(--highlight-color-darken);
-}
-
 /* Trick List */
 .trick-list {
   border-radius: 10px;
