@@ -16,7 +16,8 @@
 }
 
 .footer svg {
-  transform: translateY(5px)
+  transform: translateY(5px);
+  color: var(--contrast-color)
 }
 
 .footer-link svg:nth-child(1) {
