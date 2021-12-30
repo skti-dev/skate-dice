@@ -1,58 +1,30 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 import History from "../History/History"
+import allData from "../../assets/data/dummyData"
 
 const Dice = () => {
-  const [stances] = useState(["Regular", "Switch", "Fakie", "Nollie", false])
-  const [directions] = useState(["Backside", "Frontside", false])
-  const [spins] = useState(["180", "360", false])
-  const [tricks] = useState(
-    [
-      // Ollie
-      {name: "Ollie", spinnable: true, hasDirections: true}, //  reverse: false, bodyVarial: true
-      // Shove it
-      {name: "BS Shove It", spinnable: true, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "FS Shove It", spinnable: true, hasDirections: false}, //  reverse: true, bodyVarial: true
-      // Flip
-      {name: "Flip", spinnable: true, hasDirections: true}, //  reverse: false, bodyVarial: true
-      {name: "Varial Flip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "360 Flip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "Hardflip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "360 Hardflip", spinnable: false, hasDirections: false}, //  reverse: false, bodyVarial: false
-      // Heelflip
-      {name: "Heelflip", spinnable: true, hasDirections: true}, //  reverse: false, bodyVarial: true
-      {name: "Varial Heelflip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "Laser Flip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "Inward Heelflip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "360 Inward Heelflip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      // Big Spin
-      {name: "Big Spin", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      {name: "Big Spin Flip", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      {name: "Big Spin Heelflip", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      // Bigger Spin
-      {name: "Bigger Spin", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      {name: "Bigger Spin Flip", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      {name: "Bigger Spin Heelflip", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      // Gazelle Spin
-      {name: "Gazelle Spin", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      {name: "Gazelle Spin Flip", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      {name: "Gazelle Spin Heelflip", spinnable: false, hasDirections: true}, //  reverse: false, bodyVarial: false
-      // Pressure
-      {name: "Pressure Flip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      {name: "Pressure Hardflip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: true
-      // Impossible
-      {name: "Impossible", spinnable: false, hasDirections: false}, //  reverse: false, bodyVarial: false
-      // Casper
-      {name: "Casper Flip", spinnable: false, hasDirections: false}, //  reverse: false, bodyVarial: false
-      {name: "Alpha Flip", spinnable: false, hasDirections: false}, //  reverse: false, bodyVarial: false
-      // Dolphin
-      {name: "Dolphin Flip", spinnable: false, hasDirections: false}, //  reverse: true, bodyVarial: false
-      {name: "Dragon Flip", spinnable: false, hasDirections: false}, //  reverse: false, bodyVarial: false
-      // Old School
-      {name: "Old School Flip", spinnable: true, hasDirections: true}, //  reverse: false, bodyVarial: true
-      {name: false, spinnable: true, hasDirections: true}
-    ]
-  )
+  const [stances, setStances] = useState([])
+  const [directions, setDirections] = useState([])
+  const [spins, setSpins] = useState([])
+  const [tricks, setTricks] = useState([])
+  
+  useEffect(() => {
+    const loadData = () => {
+      try {
+        if(tricks.length) return true
+        const { allStances, allDirections, allSpins, allTricks } = allData
+        setStances(allStances)
+        setDirections(allDirections)
+        setSpins(allSpins)
+        setTricks(allTricks)
+      }catch(e) {
+        console.error("Error while loading data")
+        console.error(e)
+      }
+    }
+    loadData()
+  })
 
   const [hasFinalTrick, setHasFinalTrick] = useState(false)
   const [selectedStance, setSelectedStance] = useState("")
