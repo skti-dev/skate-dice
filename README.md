@@ -1,2 +1,3 @@
 # Skate Dice
-## Generate random skate tricks.
+
+Generate random skate tricks.

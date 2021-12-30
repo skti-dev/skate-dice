@@ -38,20 +38,6 @@ body > div {
   position: relative;
 }
 
-/* Content */
-.content {
-  flex: 1;
-  height: calc(100% - 150px);
-  margin: 20px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.content h2 {
-  font-size: 1.275rem;
-}
-
 /* Tooltip */
 .tooltip {
   padding: 5px 10px;

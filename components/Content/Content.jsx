@@ -35,7 +35,7 @@ const Content = () => {
   const [selectedSpin, setSelectedSpin] = useState("")
   const [selectedTrick, setSelectedTrick] = useState("")
   const [tries, setTries] = useState(0)
-  const [currentStatus, setCurrentStatus] = useState('')
+  const [currentStatus, setCurrentStatus] = useState("")
 
   const selectRandomValueFromArr = arr => {
     return arr[Math.floor(Math.random() * arr.length)]
@@ -60,7 +60,7 @@ const Content = () => {
       setSelectedSpin(!spinnable ? "---" : randomSpin ? randomSpin : yourChoiceText)
       setSelectedTrick(name ? name : yourChoiceText)
       setTries(Math.floor(Math.random() * 5) + 1)
-      setCurrentStatus('')
+      setCurrentStatus("")
       
       if(hasHistory) history.push({ selectedStance, selectedDirection, selectedSpin, selectedTrick, tries, currentStatus })
       if(!hasHistory) setHasHistory(true)
@@ -84,8 +84,8 @@ const Content = () => {
           selectedTrick={selectedTrick}
           tries={tries}
           currentStatus={currentStatus}
-          handleYesClick={() => { setCurrentStatus('y') }}
-          handleNoClick={() => { setCurrentStatus('n') }}
+          handleYesClick={() => { setCurrentStatus("y") }}
+          handleNoClick={() => { setCurrentStatus("n") }}
         /> 
       }
       <History history={history}  />
