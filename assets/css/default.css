@@ -83,6 +83,38 @@ body > div {
   font-size: 1.175em;
 }
 
+.trick-list hr {
+  height: 1px;
+  border: unset;
+  background-color: var(--primary-color);
+  margin: 2px 0 5px 0;
+}
+
+.status-icon svg {
+  margin-bottom: -7px;
+  cursor: pointer;
+  transition: all 150ms;
+  opacity: .8;
+}
+
+.status-icon.red svg {
+  fill: #f18084;
+  stroke: #c40007;
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.status-icon.green svg {
+  fill: #a4fda4;
+  stroke: #047500;
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.status-icon:nth-child(1) {
+  margin: 0 10px;
+}
+
 /* Dice */
 .dice-container {
   width: 100%;
@@ -128,14 +160,17 @@ body > div {
   font-size: .9rem;
   position: absolute; 
   background-color: var(--dark-color);
-  border-radius: 10px;
-  width: 230px;
-  max-width: 230px;
-  right: -237px;
+  border-radius: 3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   box-shadow: 0 0 10px 0px var(--box-shadow-color);
+}
+
+.tooltip-history {
+  width: 230px;
+  max-width: 230px;
+  left: 63px;
 }
 
 .history-container {
@@ -174,6 +209,10 @@ body > div {
   background-color: var(--primary-color)
 }
 
+.history-content ul {
+  font-size: .8rem;
+}
+
 .history-content li {
   padding: 10px 15px;
   border-bottom: 1px solid var(--secondary-color)
@@ -183,14 +222,14 @@ body > div {
   border-bottom: unset;
 }
 
-.history-content ul {
-  font-size: .8rem;
-}
-
 .history-content ul li > span {
   font-size: 1.2em;
   font-weight: bold;
   margin: 0 10px 0 5px;
+}
+
+.history-content svg {
+  transform: translateY(3px)
 }
 
 /* Footer */

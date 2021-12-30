@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 
+import History from "../History/History"
+
 const Dice = () => {
   const [stances] = useState(["Regular", "Switch", "Fakie", "Nollie", false])
   const [directions] = useState(["Backside", "Frontside", false])
@@ -58,20 +60,14 @@ const Dice = () => {
   const [selectedSpin, setSelectedSpin] = useState("")
   const [selectedTrick, setSelectedTrick] = useState("")
   const [tries, setTries] = useState(0)
-
-  const [hasError, setHasError] = useState(false)
+  const [currentStatus, setCurrentStatus] = useState('')
 
   const selectRandomValueFromArr = arr => {
     return arr[Math.floor(Math.random() * arr.length)]
   } 
 
   const [hasHistory, setHasHistory] = useState(false)
-  const [isHistoryOpen, setIsHistoryOpen] = useState(false)
   const [history] = useState([])
-
-  const handleClick = () => {
-    setIsHistoryOpen(!isHistoryOpen)
-  }
 
   const sortTrick = () => {
     try {
@@ -89,17 +85,16 @@ const Dice = () => {
       setSelectedSpin(!spinnable ? "---" : randomSpin ? randomSpin : yourChoiceText)
       setSelectedTrick(name ? name : yourChoiceText)
       setTries(Math.floor(Math.random() * 5) + 1)
+      setCurrentStatus('')
       
-      if(hasHistory) history.push({ selectedStance, selectedDirection, selectedSpin, selectedTrick, tries })
+      if(hasHistory) history.push({ selectedStance, selectedDirection, selectedSpin, selectedTrick, tries, currentStatus })
       if(!hasHistory) setHasHistory(true)
 
-      if(hasError) setHasError(false)
       if(!hasFinalTrick) setHasFinalTrick(true)
     }catch(e) {
       console.error("An error has occured while sorting a new trick")
       console.error(e)
       setHasFinalTrick(false)
-      setHasError(true)
     }
   }
 
@@ -119,65 +114,24 @@ const Dice = () => {
               <li>Giro: <span>{selectedSpin}</span> </li>
               <li>Manobra: <span>{selectedTrick}</span> </li>
               <li>Tentativas: <span>{tries}</span> </li>
+              <hr />
+              <li>Acertou? 
+                <span onClick={() => { setCurrentStatus('y') }} className={`status-icon ${currentStatus == 'y' ? 'green' : ''}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </span>
+                <span onClick={() => { setCurrentStatus('n') }} className={`status-icon ${currentStatus == 'n' ? 'red' : ''}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </span> 
+              </li>
             </ul>
-            {
-              history.length > 0 && (
-                <>
-                  <span className="open-history" onClick={() => { handleClick() }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path fill="none" d="M0 0H24V24H0z"/><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12h2c0 4.418 3.582 8 8 8s8-3.582 8-8-3.582-8-8-8C9.25 4 6.824 5.387 5.385 7.5H8v2H2v-6h2V6c1.824-2.43 4.729-4 8-4zm1 5v4.585l3.243 3.243-1.415 1.415L11 12.413V7h2z"/></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                    {
-                      !isHistoryOpen && (<span className="tooltip"> Clique para visualizar o histórico </span>)
-                    }
-                  </span>
-                  {
-                    isHistoryOpen ? (
-                      <div className="history-container">
-                        <div className="history-title">
-                          <span className="history-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0H24V24H0z"/><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12h2c0 4.418 3.582 8 8 8s8-3.582 8-8-3.582-8-8-8C9.25 4 6.824 5.387 5.385 7.5H8v2H2v-6h2V6c1.824-2.43 4.729-4 8-4zm1 5v4.585l3.243 3.243-1.415 1.415L11 12.413V7h2z"/></svg>
-                          </span>
-                          <h3>Histórico</h3>
-                        </div>
-                        <div className="history-content">
-                          <ul>
-                            {
-                              history.map(({ selectedStance, selectedDirection, selectedSpin, selectedTrick, tries }, index) => {
-                                return (
-                                  <li key={index}>
-                                    {index + 1} -
-                                    Base:
-                                    <span>{selectedStance}</span>
-                                    Direção:
-                                    <span>{selectedDirection}</span>
-                                    Giro:
-                                    <span>{selectedSpin}</span>
-                                    Manobra:
-                                    <span>{selectedTrick}</span>
-                                    Tentativas:
-                                    <span>{tries}</span>
-                                  </li>
-                                )
-                              })
-                            }
-                          </ul>
-                        </div>
-                      </div>
-                    ) : null
-                  }
-                </>
-              )
-            }
           </>
         )
       }
-      {
-        hasError && (
-          <p> Ocorreu um erro ao tentar sortear uma manobra. Por favor tente novamente.</p>
-        )
-      }
+      <History history={history}  />
     </div>
   )
 }
