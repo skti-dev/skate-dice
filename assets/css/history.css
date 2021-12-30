@@ -21,7 +21,7 @@
 .history-container {
   margin-bottom: 15px;
   flex: 1;
-  max-height: 200px;
+  max-height: 40%;
 }
 
 .history-title {
